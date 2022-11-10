@@ -1,0 +1,8 @@
+{
+  "near_rpc_url": "https://archival-rpc.testnet.near.org",
+  "sender": "you.name.testnet",
+  "sender_private_key": "ed25519:",
+  "multisig_account": "xxx.testnet",
+  "mcs_account": "xxx.testnet",
+  "mcs_wasm_file": "/path/to/mcs.wasm"
+}
