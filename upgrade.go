@@ -47,7 +47,7 @@ type Config struct {
 	Sender           string `json:"sender"`
 	MultisigAccount  string `json:"multisig_account"`
 	MCSAccount       string `json:"mcs_account"`
-	MCSWsamFile      string `json:"mcs_wasm_file"`
+	MCSWasmFile      string `json:"mcs_wasm_file"`
 	SenderPrivateKey string `json:"sender_private_key"`
 	NearRPCUrl       string `json:"near_rpc_url"`
 }
@@ -68,11 +68,14 @@ func UnmarshalConfig(repoRoot string) (*Config, error) {
 		return nil, err
 	}
 
+	fmt.Println(config)
+
 	return config, nil
 }
 
 func upgrade(cliCtx *cli.Context) error {
 	path := cliCtx.String("config")
+	fmt.Println("path", path)
 	config, err := UnmarshalConfig(path)
 	if err != nil {
 		return fmt.Errorf("unmarshal config file: %v", err)
@@ -83,12 +86,13 @@ func upgrade(cliCtx *cli.Context) error {
 		return fmt.Errorf("new near client: %v", err)
 	}
 
+	fmt.Println("private key", config.SenderPrivateKey)
 	keyPair, err := key.NewBase58KeyPair(config.SenderPrivateKey)
 	if err != nil {
-		return fmt.Errorf("new base58 key pair: %v", err)
+		return fmt.Errorf("new base58 key pair with %s: %v", config.SenderPrivateKey, err)
 	}
 
-	code, err := ioutil.ReadFile(config.MCSWsamFile)
+	code, err := ioutil.ReadFile(config.MCSWasmFile)
 	if err != nil {
 		return fmt.Errorf("read mcs contract file: %v", err)
 	}
@@ -97,7 +101,7 @@ func upgrade(cliCtx *cli.Context) error {
 	upgradeArgs := fmt.Sprintf("{\"code\": \"%s\"}", encodedCode)
 	upgradeArgsEncode := base64.StdEncoding.EncodeToString([]byte(upgradeArgs))
 	payload := fmt.Sprintf(
-		"{\"request\":{\"receiver_id\":\"%s\",\"actions\":[{\"type\":\"FunctionCall\",\"method_name\":\"upgrade_self\",\"args\":\"%s\",\"deposit\":\"0\",\"gas\":\"150000000000000\"}]}}",
+		"{\"request\":{\"receiver_id\":\"%s\",\"actions\":[{\"type\":\"FunctionCall\",\"method_name\":\"upgrade_self\",\"args\":\"%s\",\"deposit\":\"0\",\"gas\":\"160000000000000\"}]}}",
 		config.MCSAccount,
 		upgradeArgsEncode,
 	)
@@ -115,7 +119,7 @@ func upgrade(cliCtx *cli.Context) error {
 		return fmt.Errorf("TransactionSendAwait: %v", err)
 	}
 
-	fmt.Printf("https://rpc.testnet.near.org/transactions/%s\n", res.Transaction.Hash)
+	fmt.Printf("https://explorer.testnet.near.org/transactions/%s\n", res.Transaction.Hash)
 
 	return nil
 }
