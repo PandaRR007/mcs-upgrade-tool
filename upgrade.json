@@ -1,8 +1,8 @@
 {
   "nearRpcUrl": "https://archival-rpc.testnet.near.org",
   "sender": "member1.map002.testnet",
-  "senderPrivateKey": "ed25519:21oRAPANYW5FoMj83PABGBBT3AxUVM6SszV13mJREzi1koSxzfLwaxNzUwuLjrrntnaARGpwHUTA5p2Y1HNZ2BMg",
+  "senderPrivateKey": "ed25519:...",
   "multisigAccount": "multisig.mfac.map004.testnet",
   "mcsAccount": "mos2.mfac.map004.testnet",
-  "mcsWasmFile": "/Users/rong/WorkMap/map-contracts/mcs/near/scripts/res/mcs.wasm"
+  "mcsWasmFile": "/path/to/mcs.wasm"
 }
