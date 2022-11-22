@@ -2,6 +2,13 @@
 
 A tool for multisig member to add "upgrade MCS contract" request and confirm it.
 
+## Table of Contents
+
+- [Pre-requisite](#pre-requisite)
+- [How to Build](#how-to-build)
+- [Usage](#usage)
+
+
 ## Pre-requisite
 
 **Go (version 1.18 or later)**
@@ -9,7 +16,7 @@ A tool for multisig member to add "upgrade MCS contract" request and confirm it.
 Go are available at the [Go installation page](https://go.dev/doc/install) and necessary bundles can be downloaded from the [Go download page](https://go.dev/dl/).
 
 
-## Build
+## How to Build
 ```shell
 git clone https://github.com/PandaRR007/mcs-upgrade-tool.git
 cd mcs-upgrade-tool
@@ -23,14 +30,21 @@ You can see a binary **mcs-upgrade-tool** is generated.
 1. Configure upgrade.json
 ```json
 {
-  "nearRpcUrl": "https://archival-rpc.testnet.near.org",   // near rpc url
-  "sender": "member1.map002.testnet",                      // multisig member account to add the request
-  "senderPrivateKey": "ed25519:...",                       // private key of the multisig member
-  "multisigAccount": "multisig.mfac.map004.testnet",       // multisig contract account
-  "mcsAccount": "mos2.mfac.map004.testnet",                // MCS contract account to be upgraded
-  "mcsWasmFile": "/path/to/mcs.wasm"                       // MCS contract wasm file to upgrade the MCS contract
+  "nearRpcUrl": "https://archival-rpc.testnet.near.org",  
+  "sender": "member1.map002.testnet",                     
+  "senderPrivateKey": "ed25519:...",                       
+  "multisigAccount": "multisig.mfac.map004.testnet",      
+  "mcsAccount": "mos2.mfac.map004.testnet",              
+  "mcsWasmFile": "/path/to/mcs.wasm"                     
 }
 ```
+* **nearRpcUrl**: near rpc url
+* **sender**: multisig member account to add the request
+* **senderPrivateKey**: private key of the multisig member
+* **multisigAccount**: multisig contract account
+* **mcsAccount**: MCS contract account to be upgraded
+* **mcsWasmFile**: MCS contract wasm file to upgrade the MCS contract
+
 
 2. Execute upgrade command
 
