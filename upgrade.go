@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/base64"
 	"fmt"
+	uint128 "github.com/eteu-technologies/golang-uint128"
 	"github.com/mapprotocol/near-api-go/pkg/client"
 	"github.com/mapprotocol/near-api-go/pkg/types"
 	"github.com/mapprotocol/near-api-go/pkg/types/action"
@@ -111,7 +112,7 @@ func upgrade(cliCtx *cli.Context) error {
 		ctx,
 		config.Sender,
 		config.MultisigAccount,
-		[]action.Action{action.NewFunctionCall("add_request_and_confirm", []byte(payload), 30*10000000000000, types.Balance{})},
+		[]action.Action{action.NewFunctionCall("add_request_and_confirm", []byte(payload), 30*10000000000000, types.Balance(uint128.From64(1)))},
 		client.WithLatestBlock(),
 		client.WithKeyPair(keyPair),
 	)
