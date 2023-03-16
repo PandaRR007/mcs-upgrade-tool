@@ -102,7 +102,7 @@ func upgrade(cliCtx *cli.Context) error {
 	upgradeArgs := fmt.Sprintf("{\"code\": \"%s\"}", encodedCode)
 	upgradeArgsEncode := base64.StdEncoding.EncodeToString([]byte(upgradeArgs))
 	payload := fmt.Sprintf(
-		"{\"request\":{\"receiver_id\":\"%s\",\"actions\":[{\"type\":\"FunctionCall\",\"method_name\":\"upgrade_self\",\"args\":\"%s\",\"deposit\":\"0\",\"gas\":\"160000000000000\"}]}}",
+		"{\"request\":{\"receiver_id\":\"%s\",\"actions\":[{\"type\":\"FunctionCall\",\"method_name\":\"upgrade_self\",\"args\":\"%s\",\"deposit\":\"0\",\"gas\":\"180000000000000\"}]}}",
 		config.MCSAccount,
 		upgradeArgsEncode,
 	)
